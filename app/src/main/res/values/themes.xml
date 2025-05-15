@@ -7,4 +7,35 @@
     </style>
 
     <style name="Theme.InternshipBatch2" parent="Base.Theme.InternshipBatch2" />
+
+    <style name="text_20" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/_20sdp</item>
+    </style>
+
+
+    <style name="text_16" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/_16sdp</item>
+    </style>
+
+    <style name="button_18" parent="Widget.AppCompat.Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/_18sdp</item>
+        <item name="android:background">@drawable/round_button</item>
+        <item name="android:layout_marginHorizontal">@dimen/_20sdp</item>
+    </style>
+
+    <style name="edit_text" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/custom_borders</item>
+        <item name="android:layout_marginHorizontal">@dimen/_20sdp</item>
+    </style>
+
+
 </resources>
