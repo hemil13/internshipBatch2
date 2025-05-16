@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
     tools:context=".MainActivity">
 
     <TextView
@@ -29,6 +28,7 @@
 
 
     <EditText
+        android:id="@+id/main_email"
         style="@style/edit_text"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -37,6 +37,7 @@
         />
 
     <EditText
+        android:id="@+id/main_password"
         style="@style/edit_text"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -48,11 +49,11 @@
 
     <TextView
         style="@style/text_16"
+        android:layout_marginTop="@dimen/_5sdp"
         android:text="@string/forget_password"
         android:textColor="@color/blue_login"
         android:layout_gravity="end"
         android:layout_marginRight="@dimen/_20sdp"
-
         />
 
 
@@ -60,20 +61,16 @@
     <TextView
         style="@style/text_16"
         android:text="@string/create_new_account"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_40sdp"
         />
 
     <Button
+        android:id="@+id/main_login"
         style="@style/button_18"
         android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/login_button"
         app:backgroundTint="@null"
         />
-
-
-
-
 
 </LinearLayout>
