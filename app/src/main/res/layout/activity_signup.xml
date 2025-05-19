@@ -6,26 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <TextView
             style="@style/text_20"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_80sdp"
-            android:text="@string/login"
+            android:text="Create Account"
             android:textColor="@color/blue_login"
             android:textStyle="bold"
-             />
+            />
 
         <TextView
             style="@style/text_20"
-            android:text="@string/welcome"
+            android:text="Create an Account so you can explore all the \nexisting jobs"
             android:layout_gravity="center"
+            android:textSize="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:textAlignment="center"
             android:layout_margin="@dimen/_25sdp"
@@ -33,16 +35,38 @@
 
 
         <EditText
-            android:id="@+id/main_email"
+            android:id="@+id/singup_name"
+            style="@style/edit_text"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:hint="Name"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="@dimen/_5sdp"
+            />
+
+
+        <EditText
+            android:id="@+id/signup_email"
             style="@style/edit_text"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
+            android:layout_marginBottom="@dimen/_7sdp"
             android:drawableLeft="@drawable/ic_lock"
             android:drawablePadding="@dimen/_5sdp"
             />
 
         <EditText
-            android:id="@+id/main_password"
+            android:id="@+id/singup_contact"
+            style="@style/edit_text"
+            android:hint="Contact Number"
+            android:inputType="phone"
+            android:drawableLeft="@drawable/ic_lock"
+            android:maxLength="10"
+            android:drawablePadding="@dimen/_5sdp"
+            />
+
+
+        <EditText
+            android:id="@+id/singup_password"
             style="@style/edit_text"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -51,35 +75,39 @@
             android:drawablePadding="@dimen/_5sdp"
             />
 
-
-        <TextView
-            android:id="@+id/main_forget_password"
-            style="@style/text_16"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/forget_password"
-            android:textColor="@color/blue_login"
-            android:layout_gravity="end"
-            android:layout_marginRight="@dimen/_20sdp"
+        <EditText
+            android:id="@+id/signup_cnfpassword"
+            style="@style/edit_text"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="@dimen/_5sdp"
             />
 
 
 
+
+
+
         <TextView
-            android:id="@+id/main_create_account"
+            android:id="@+id/signup_already_account"
             style="@style/text_16"
-            android:text="@string/create_new_account"
+            android:text="Already Have An Account"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_40sdp"
             />
 
         <Button
-            android:id="@+id/main_login"
+            android:id="@+id/signup_button"
             style="@style/button_18"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/login_button"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:text="Signup"
             app:backgroundTint="@null"
+            android:layout_marginBottom="@dimen/_30sdp"
             />
 
     </LinearLayout>
+
+
 </ScrollView>
