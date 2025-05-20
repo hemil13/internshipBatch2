@@ -1,6 +1,7 @@
 package com.example.internshipbatch2;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,11 +25,17 @@ public class SignupActivity extends AppCompatActivity {
     EditText email, password, name, contact, cnfpassword;
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_signup);
+
+        db = openOrCreateDatabase("InternshipBatch2.db", MODE_PRIVATE, null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50), email VARCHAR(100), contact VARCHAR(15), password VARCHAR(25))";
+        db.execSQL(tableQuery);
 
         already_account = findViewById(R.id.signup_already_account);
         signup = findViewById(R.id.signup_button);
@@ -90,6 +97,9 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 else{
+                    String insertQuery = "INSERT INTO user VALUES(null, '"+name.getText().toString()+"', '"+email.getText().toString()+"', '"+contact.getText().toString()+"', '"+password.getText().toString()+"')";
+                    db.execSQL(insertQuery);
+
                     Toast.makeText(SignupActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(SignupActivityty.class);
 //                    startActivity(intent);
