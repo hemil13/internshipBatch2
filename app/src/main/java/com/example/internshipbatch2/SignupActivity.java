@@ -1,6 +1,7 @@
 package com.example.internshipbatch2;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -97,10 +98,21 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 else{
-                    String insertQuery = "INSERT INTO user VALUES(null, '"+name.getText().toString()+"', '"+email.getText().toString()+"', '"+contact.getText().toString()+"', '"+password.getText().toString()+"')";
-                    db.execSQL(insertQuery);
 
-                    Toast.makeText(SignupActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
+                    String checkEmail = "SELECT * FROM user WHERE email = '"+email.getText().toString()+"' OR contact = '"+contact.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(checkEmail, null);
+
+                    if (cursor.getCount()>0){
+                        Toast.makeText(SignupActivity.this, "Email or Contact already exists", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else{
+                        String insertQuery = "INSERT INTO user VALUES(null, '"+name.getText().toString()+"', '"+email.getText().toString()+"', '"+contact.getText().toString()+"', '"+password.getText().toString()+"')";
+                        db.execSQL(insertQuery);
+
+                        Toast.makeText(SignupActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
+                    }
+
 //                    Intent intent = new Intent(SignupActivityty.class);
 //                    startActivity(intent);
                 }

@@ -2,10 +2,15 @@ package com.example.internshipbatch2;
 
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     TextView forget_password, create_account;
 
+    ImageView openIV, closeIV;
+
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.main_password);
         forget_password = findViewById(R.id.main_forget_password);
         create_account = findViewById(R.id.main_create_account);
+        openIV = findViewById(R.id.openIV);
+        closeIV = findViewById(R.id.closeIV);
+
+        db = openOrCreateDatabase("InternshipBatch2.db", MODE_PRIVATE, null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50), email VARCHAR(100), contact VARCHAR(15), password VARCHAR(25))";
+        db.execSQL(tableQuery);
 
         create_account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +63,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        openIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeIV.setVisibility(View.VISIBLE);
+                openIV.setVisibility(View.GONE);
+                password.setTransformationMethod(new PasswordTransformationMethod());
+            }
+        });
+
+        closeIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeIV.setVisibility(View.GONE);
+                openIV.setVisibility(View.VISIBLE);
+                password.setTransformationMethod(new HideReturnsTransformationMethod());
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
                     email.setError("Enter Email");
                 }
 
-                else if (!email.getText().toString().matches(email_pattern)) {
-                    email.setError("Enter valid email");
-                }
 
                 else if (password.getText().toString().trim().equals("")) {
                     password.setError("Enter password");
@@ -69,10 +98,19 @@ public class MainActivity extends AppCompatActivity {
                     password.setError("Minimum 6 characters");
                 }
 
+
                 else{
-                    Toast.makeText(MainActivity.this, "Login Sucessfull", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                    startActivity(intent);
+
+                    String loginQuery = "SELECT * FROM user WHERE (email = '"+email.getText().toString()+"' OR contact = '"+email.getText().toString()+"') AND password = '"+password.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(loginQuery, null);
+                    if (cursor.getCount()>0){
+                        Toast.makeText(MainActivity.this, "Login Sucessfull", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                    }
+
+                    else{
+                        Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();                    }
                 }
 
 //                Snackbar.make(view,"Login Sucessfull", Snackbar.LENGTH_LONG).show();
