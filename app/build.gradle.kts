@@ -42,4 +42,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation (libs.sdp.android)
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }

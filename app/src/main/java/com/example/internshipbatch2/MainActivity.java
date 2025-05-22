@@ -2,6 +2,7 @@ package com.example.internshipbatch2;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -30,10 +31,14 @@ public class MainActivity extends AppCompatActivity {
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
     SQLiteDatabase db;
 
+    SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sp = getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
 
         login = findViewById(R.id.main_login);
         email = findViewById(R.id.main_email);
@@ -104,6 +109,17 @@ public class MainActivity extends AppCompatActivity {
                     String loginQuery = "SELECT * FROM user WHERE (email = '"+email.getText().toString()+"' OR contact = '"+email.getText().toString()+"') AND password = '"+password.getText().toString()+"'";
                     Cursor cursor = db.rawQuery(loginQuery, null);
                     if (cursor.getCount()>0){
+
+                        while(cursor.moveToNext()){
+                            sp.edit().putString(ConstantSp.userid, cursor.getString(0)).commit();
+                            sp.edit().putString(ConstantSp.name, cursor.getString(1)).commit();
+                            sp.edit().putString(ConstantSp.email, cursor.getString(2)).commit();
+                            sp.edit().putString(ConstantSp.contact, cursor.getString(3)).commit();
+                            sp.edit().putString(ConstantSp.password, cursor.getString(4)).commit();
+                        }
+
+
+
                         Toast.makeText(MainActivity.this, "Login Sucessfull", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                         startActivity(intent);
