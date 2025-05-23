@@ -27,6 +27,14 @@
         />
 
     <Button
+        android:id="@+id/dashboard_category"
+        style="@style/button_18"
+        android:text="Categry"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:backgroundTint="@null"
+        />
+
+    <Button
         android:id="@+id/dashboard_logout"
         style="@style/button_18"
         android:text="Logout"
